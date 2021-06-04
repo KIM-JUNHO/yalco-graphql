@@ -4,7 +4,6 @@ const dbWorks = require("../dbWorks.js");
 const typeDefs = gql`
   union Given = Equipment | Supply
 `;
-
 const resolvers = {
   Query: {
     givens: (parent, args) => {
@@ -23,7 +22,6 @@ const resolvers = {
     },
   },
 };
-
 module.exports = {
   typeDefs: typeDefs,
   resolvers: resolvers,
