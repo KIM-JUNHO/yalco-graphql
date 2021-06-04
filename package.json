@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/KIM-JUNHO/yalco-graphql/issues"
   },
-  "homepage": "https://github.com/KIM-JUNHO/yalco-graphql#readme"
+  "homepage": "https://github.com/KIM-JUNHO/yalco-graphql#readme",
+  "dependencies": {
+    "convert-csv-to-json": "^1.3.0"
+  }
 }
