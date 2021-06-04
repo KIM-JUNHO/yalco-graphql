@@ -40,6 +40,8 @@ const DELETE_TEAM = gql`
   }
 `;
 
+let refetchTeams;
+
 function Teams() {
   const [contentId, setContentId] = useState(0);
   const [inputs, setInputs] = useState({
@@ -61,6 +63,7 @@ function Teams() {
   function deleteTeamCompleted(data) {
     console.log(data.deleteTeam);
     alert(`${data.deleteTeam.id} 항목이 삭제되었습니다.`);
+    refetchTeams();
     setContentId(0);
   }
   function AsideItems() {
@@ -71,6 +74,7 @@ function Teams() {
     };
 
     const { loading, error, data, refetch } = useQuery(GET_TEAMS);
+    refetchTeams = refetch;
 
     if (loading) return <p className="loading">Loading...</p>;
     if (error) return <p className="error">Error :(</p>;
