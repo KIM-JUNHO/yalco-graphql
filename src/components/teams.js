@@ -40,6 +40,20 @@ const DELETE_TEAM = gql`
   }
 `;
 
+const EDIT_TEAM = gql`
+  mutation EditTeam($id: ID!, $input: PostTeamInput!) {
+    editTeam(id: $id, input: $input) {
+      id
+      manager
+      office
+      extension_number
+      mascot
+      cleaning_duty
+      project
+    }
+  }
+`;
+
 let refetchTeams;
 
 function Teams() {
@@ -65,6 +79,20 @@ function Teams() {
     alert(`${data.deleteTeam.id} 항목이 삭제되었습니다.`);
     refetchTeams();
     setContentId(0);
+  }
+  function execEditTeam() {
+    editTeam({
+      variables: {
+        id: contentId,
+        input: inputs,
+      },
+    });
+  }
+  const [editTeam] = useMutation(EDIT_TEAM, { onCompleted: editTeamCompleted });
+  function editTeamCompleted(data) {
+    console.log(data.editTeam);
+    alert(`${data.editTeam.id} 항목이 수정되었습니다.`);
+    refetchTeams();
   }
   function AsideItems() {
     const roleIcons = {
@@ -229,7 +257,7 @@ function Teams() {
           </div>
         ) : (
           <div className="buttons">
-            <button onClick={() => {}}>Modify</button>
+            <button onClick={execEditTeam}>Modify</button>
             <button onClick={execDeleteTeam}>Delete</button>
             <button
               onClick={() => {
